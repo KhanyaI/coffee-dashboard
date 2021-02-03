@@ -13,7 +13,7 @@ import dash_bootstrap_components as dbc
 
 #Reading in the data
 url2018 = 'https://github.com/KhanyaI/coffee-dashboard/blob/main/arabica_2018.csv'
-df_2018 = pd.DataFrame(pd.read_csv(url2018,sep='delimiter'))
+df_2018 = pd.DataFrame(pd.read_csv(url2018))
 
 
 #Prepping the dataframe
