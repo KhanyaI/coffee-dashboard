@@ -17,9 +17,7 @@ df_2018 = pd.DataFrame(pd.read_csv(url2018,sep='delimiter'))
 
 
 #Prepping the dataframe
-replacement = {
-    "Tanzania, United Republic Of": "Tanzania",
-    "Cote d?Ivoire": "Ivory Coast"}
+replacement = {"Tanzania, United Republic Of": "Tanzania","Cote d?Ivoire": "Ivory Coast"}
 
 df_2018['Country.of.Origin'] = df_2018['Country.of.Origin'].replace(replacement)
 
