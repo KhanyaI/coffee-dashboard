@@ -9,18 +9,14 @@ from plotly.subplots import make_subplots
 from dash.dependencies import Input, Output
 from plotly.subplots import make_subplots
 import dash_bootstrap_components as dbc
-import fsspec
-import gcsfs
+
 
 #Reading in the data
-df_2020 = pd.DataFrame(pd.read_csv('gs://dash-app-csv/arabica_merged.csv'))
-df_2018 = pd.DataFrame(pd.read_csv('gs://dash-app-csv/arabica_2018.csv'))
+url2018 = 'https://github.com/KhanyaI/coffee-dashboard/blob/main/arabica_2018.csv'
+df_2018 = pd.DataFrame(pd.read_csv(url2018,sep=","))
 
-#Prepping the dataframes
-df_2020.drop(['0', '1', '2', '3',
-       '84.50', '83.83', '83.17', '86.25', '82.67', '85.00', '82.25', '84.08',
-       '82.50'], axis=1,inplace=True)
 
+#Prepping the dataframe
 replacement = {
     "Tanzania, United Republic Of": "Tanzania",
     "Cote d?Ivoire": "Ivory Coast"}
@@ -49,13 +45,6 @@ colors = {
 }
 
 
-fig2020 = px.scatter_geo(country_grade, locations="Country", locationmode='country names', color="Country",
-                     hover_name="Grade", size="Grade",
-                     projection="equirectangular")
-
-
-
-fig2020.update_layout(height=600,width=800,showlegend=False)
 
 #Subplots per attribute
 figsubplots = make_subplots(rows=2, cols=4,subplot_titles=("Aftertaste", "Aroma", "Flavor", "Acidity", "Body", "Balance", "Uniformity", "Sweetness"),
@@ -154,4 +143,25 @@ def update_graph(value):
 if __name__ == '__main__':
   app.run_server(debug=True)  
 
+
+
+
+"""
+#2020
+url2020 = 'https://github.com/KhanyaI/coffee-dashboard/blob/main/arabica_merged.csv'
+
+df_2020 = pd.DataFrame(pd.read_csv('gs://dash-app-csv/arabica_merged.csv'))
+
+df_2020.drop(['0', '1', '2', '3',
+       '84.50', '83.83', '83.17', '86.25', '82.67', '85.00', '82.25', '84.08',
+       '82.50'], axis=1,inplace=True)
+
+fig2020 = px.scatter_geo(country_grade, locations="Country", locationmode='country names', color="Country",
+                     hover_name="Grade", size="Grade",
+                     projection="equirectangular")
+
+
+
+fig2020.update_layout(height=600,width=800,showlegend=False)
+"""
 
